@@ -35,7 +35,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $transaksi->tanggal_transaksi }}</td>
-                            <td>{{ $transaksi->user_id }}</td>
+                            <td>{{ $transaksi->user->username }}</td>
                             <td>{{ $transaksi->alamat }}</td>
                             <td>{{ $transaksi->outlet }}</td>
                             <td>{{ $transaksi->qty }}</td>

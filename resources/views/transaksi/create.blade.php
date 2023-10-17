@@ -15,9 +15,9 @@
         </div>
         <div class="mb-3">
             <label for="status" class="form-label">Sales</label>
-            <select class="form-select" aria-label="Default select example" name="user_id">
+            <select class="form-select" style="font-size: 16px" aria-label="Default select example" name="user_id">
                 @foreach ($users as $user)
-                <option value="{{ $user->id }}">{{ $user->username }}</option>
+                <option value="{{ $user->id }}"><h2>{{ $user->username }}</h2></option>
                     
                 @endforeach
                 
@@ -51,7 +51,7 @@
         </div>
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
-            <select class="form-select" aria-label="Default select example" name="status">
+            <select class="form-select" style="font-size: 16px" aria-label="Default select example" name="status">
                 <option value="Terantar">Terantar</option>
                 <option value="BelumTerantar">Belum Terantar</option>
               </select>
