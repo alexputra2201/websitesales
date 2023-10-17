@@ -10,7 +10,7 @@
 
         <div class="mb-3">
             <label for="tanggal" class="form-label">Tanggal</label>
-            <input type="text" class="form-control" id="tanggal" 
+            <input type="text" class="form-control" id='datetimepicker' 
             aria-describedby="tanggal" name="tanggal" required autofocus value="{{ old('tanggal') }}">
         </div>
         <div class="mb-3">
