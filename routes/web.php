@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistrasiController;
@@ -15,9 +16,11 @@ use App\Http\Controllers\RegistrasiController;
 |
 */
 
-Route::get('/transaksi', function () {
-    return view('transaksi');
-})->middleware('admin');
+
+
+Route::get('/transaksi', [TransaksiController::class, 'index']);
+Route::get('/transaksi/create', [TransaksiController::class, 'create']);
+Route::post('/transaksi', [TransaksiController::class, 'store']);
 
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
