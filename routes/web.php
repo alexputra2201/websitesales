@@ -18,16 +18,14 @@ use App\Http\Controllers\RegistrasiController;
 
 
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/transaksi', [TransaksiController::class, 'index']);
-    Route::get('/transaksi/create', [TransaksiController::class, 'create']);
-    Route::post('/transaksi', [TransaksiController::class, 'store']);
-
-    Route::get('/transaksi/{id}/edit', [TransaksiController::class, 'edit']);
-    Route::put('/transaksi/{id}', [TransaksiController::class, 'update']); 
-});
-
-// Route::resource('/transaksi', TransaksiController::class);
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/transaksi', [TransaksiController::class, 'index']);
+//     Route::get('/transaksi/create', [TransaksiController::class, 'create']);
+//     Route::post('/transaksi', [TransaksiController::class, 'store']);
+//     Route::get('/transaksi/{id}/edit', [TransaksiController::class, 'edit']);
+//     Route::put('/transaksi/{id}', [TransaksiController::class, 'update']); 
+// });
+Route::resource('/transaksi', TransaksiController::class);
 
 
 

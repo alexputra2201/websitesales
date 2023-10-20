@@ -6,6 +6,7 @@ use App\Models\Transaksi;
 use App\Models\User;
 use App\Http\Requests\StoreTransaksiRequest;
 use App\Http\Requests\UpdateTransaksiRequest;
+use Carbon\Carbon;
 
 class TransaksiController extends Controller
 {
@@ -77,11 +78,11 @@ class TransaksiController extends Controller
      * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaksi $transaksi, $id)
+    public function edit(Transaksi $transaksi)
     {
         $salesUsers = User::where('is_sales', true)->get();
         return view('transaksi.edit',[
-            'transaksi' => $transaksi::find($id),
+            'transaksi' => $transaksi,
             'users' => $salesUsers
         ]);
     }
@@ -95,7 +96,23 @@ class TransaksiController extends Controller
      */
     public function update(UpdateTransaksiRequest $request, Transaksi $transaksi)
     {
-        //
+
+        $validatedData = $request->validate([
+            'user_id' => ['required'],
+            'alamat' => ['required'],
+            'outlet' => ['required'],
+            'qty' => ['required'],
+            'satuan' => ['required'],
+            'tunai' => ['required'],
+            'status' => ['required'],
+        ]);
+        $validatedData['tanggal_transaksi'] = Carbon::parse($request->input('tanggal_transaksi'))->format('Y-m-d H:i:s');
+        
+
+        Transaksi::where('id', $transaksi->id)
+            ->update($validatedData);
+
+        return redirect('/transaksi');
     }
 
     /**
