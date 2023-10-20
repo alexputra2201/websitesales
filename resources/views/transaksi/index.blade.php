@@ -27,7 +27,10 @@
                         <th scope="col">Satuan</th>
                         <th scope="col">Tunai</th>
                         <th scope="col">Status</th>
+                        @if (auth()->check() && auth()->user()->is_sales)
                         <th scope="col">Action</th>
+                        @endif
+                       
                     </tr>
                 </thead>
                 <tbody>
@@ -42,9 +45,11 @@
                             <td>{{ $transaksi->satuan }}</td>
                             <td>{{ $transaksi->tunai }}</td>
                             <td>{{ $transaksi->status }}</td>
+                            @if (auth()->check() && auth()->user()->is_sales)
                             <td>
-                                <a href="" class="badge bg-warning"> Edit</a>
+                                <a href="/transaksi/{{ $transaksi->id }}/edit" class="badge bg-warning"> Edit</a>
                             </td>
+                            @endif
                         </tr>
                     @endforeach
 

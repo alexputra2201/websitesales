@@ -17,7 +17,7 @@ class TransaksiController extends Controller
     public function index()
     {
         return view('transaksi.index',[
-            'transaksis' => Transaksi::with('user')->get()
+            'transaksis' => Transaksi::with('user')->latest()->get()
         ]);
     }
 
@@ -29,8 +29,9 @@ class TransaksiController extends Controller
     public function create()
     {
         //
+        $salesUsers = User::where('is_sales', true)->get();
         return view('transaksi.create', [
-            'users' => User::all()
+            'users' => $salesUsers
         ]);
     }
 
@@ -76,9 +77,12 @@ class TransaksiController extends Controller
      * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaksi $transaksi)
+    public function edit(Transaksi $transaksi, $id)
     {
-        //
+        return view('transaksi.edit',[
+            'transaksi' => $transaksi::find($id),
+            'users' => User::all()
+        ]);
     }
 
     /**
