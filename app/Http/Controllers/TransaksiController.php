@@ -79,9 +79,10 @@ class TransaksiController extends Controller
      */
     public function edit(Transaksi $transaksi, $id)
     {
+        $salesUsers = User::where('is_sales', true)->get();
         return view('transaksi.edit',[
             'transaksi' => $transaksi::find($id),
-            'users' => User::all()
+            'users' => $salesUsers
         ]);
     }
 
