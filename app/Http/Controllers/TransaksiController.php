@@ -80,6 +80,14 @@ class TransaksiController extends Controller
      */
     public function edit(Transaksi $transaksi)
     {
+
+         // Mengecek apakah session edit sudah diset sebelumnya
+    if(session('is_edit')){
+        return redirect('/transaksi')->with('error', 'Anda tidak diizinkan untuk mengedit catatan ini lagi.');
+    }
+
+    // Menyimpan data session edit
+    session(['is_edit' => true]);
         $salesUsers = User::where('is_sales', true)->get();
         return view('transaksi.edit',[
             'transaksi' => $transaksi,

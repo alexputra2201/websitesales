@@ -5,16 +5,20 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Data Transaksi</h1>
 </div>
+@if(session('error'))
+    <div class="alert alert-danger" role="alert">
+        {{ session('error') }}
+    </div>
+@endif
 
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Transaksi</h6>
-    </div>
     <div class="card-body">
         <div class="table-responsive">
+            @if (auth()->check() && auth()->user()->is_admin)
             <a href="/transaksi/create" class="btn btn-primary mb-3">Tambah Transaksi</a>
+            @endif
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
@@ -44,7 +48,14 @@
                             <td>{{ $transaksi->qty }}</td>
                             <td>{{ $transaksi->satuan }}</td>
                             <td>{{ $transaksi->tunai }}</td>
-                            <td>{{ $transaksi->status }}</td>
+                            @if($transaksi->status == "BelumTerantar")
+                            <td><span class="badge bg-warning">{{ $transaksi->status }}</span></td>
+                            @elseif ($transaksi->status == "Terantar")
+                            <td><span class="badge bg-success">{{ $transaksi->status }}</span></td>
+                            @else
+                            <td></td>
+                            @endif
+                            
                             @if (auth()->check() && auth()->user()->is_sales)
                             <td>
                                 <a href="/transaksi/{{ $transaksi->id }}/edit" class="badge bg-warning"> Edit</a>
